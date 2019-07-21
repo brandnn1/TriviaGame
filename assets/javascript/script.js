@@ -117,6 +117,23 @@ function checkEnd () {
         //generate random index in array
         randomQ = Math.floor(Math.random()*options.length);
         pick = options[randomQ];
+        
+    //     randQuestion = pick.incorrect_answers
+    //     reorderQuestion = [];
+
+
+    //     const formRandom = (arr) => {
+    //     while (arr.length !== 0){
+    //         if (reorderQuestion.length < arr.length){
+    //             let qs = arr[Math.floor(Math.random() * arr.length)];
+    //             reorderQuestion.push(qs);
+    //             arr.splice(arr.indexOf(qs), 1);
+    //     }}
+    // }
+    //    formRandom(randQuestion)
+    //     console.log(randQuestion)
+    //     console.log(reorderQuestion)
+
     //console.log (pick);
             $("#questions").html("<h2>" + pick.question + "</h2>");
             for(var i = 0; i < pick.incorrect_answers.length + 1; i++) {
@@ -128,10 +145,32 @@ function checkEnd () {
                 //assign array position to it so can check answer
                 userChoice.attr("data-guessvalue", i);
 
-                
                 $("#answers").append(userChoice);
     //		}
     }
     
+//click function to select answer and outcomes
+$(".possibleanswer").on("click", function () {
+	//grab array position from userGuess
+    userGuess = $(this).text();
+    console.log(userGuess);
+    console.log(pick.correct_answer);
+	//correct guess or wrong guess outcomes
+	if (userGuess === pick.correct_answer) {
+		stop();
+		countCorrect++;
+		userGuess="";
+		$("#answers").html("<p>That's the right answer!</p>");
+		checkEnd();
+
+	} else {
+		stop();
+		countIncorrect++;
+		userGuess="";
+        $("#answers").html("<p>Oops, that's incorrect. The answer was: " + pick.correct_answer + "</p>");
+		checkEnd();
+	}
+})
+
 
 }
