@@ -1,7 +1,10 @@
     // Here we construct our URL
     var queryURL = "https://opentdb.com/api.php?amount=1";
     var options = []
-
+    var countCorrect = 0;
+    var countIncorrect = 0;
+    var countTimeout = 0;
+    var timer = 15;
 
     function triviaGame(queryURL) {
      $.ajax({
@@ -19,28 +22,42 @@
 
     triviaGame(queryURL)
 
+    //reset code
+    $("#reset").hide();
 
+    $("#start").on("click", function () {
+            $("#start").hide();
+            displayQuestion();
+            runTimer();
+            for(var i = 0; i < options.length; i++) {
+        holder.push(options[i]);
+    }
+        })
+
+
+    //timer code
     function runTimer(){
         if (!running) {
         intervalId = setInterval(decrement, 1000); 
         running = true;
         }
     }
-    //timer countdown
+   
+
     function decrement() {
-        $("#time").html("<h3>Time remaining: " + timer + "</h3>");
+        $("#time").html("<h2>Time remaining: " + timer + "</h2>");
         timer --;
     
-        //stop timer if reach 0
+
         if (timer === 0) {
             unanswerCount++;
             stop();
-            $("#answerblock").html("<p>Time is up! The correct answer is: " + pick.choice[pick.answer] + "</p>");
+            $("#answers").html("<p>Time is up! The correct answer is: " + pick.choice[pick.answer] + "</p>");
             hidepicture();
         }	
     }
     
-    //timer stop
+
     function stop() {
         running = false;
         clearInterval(intervalId);
