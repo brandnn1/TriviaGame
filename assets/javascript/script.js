@@ -1,5 +1,5 @@
     // Here we construct our URL
-    var queryURL = "https://opentdb.com/api.php?amount=20";
+    var queryURL = "https://opentdb.com/api.php?amount=20&difficulty=medium";
     var options = []
     var countCorrect = 0;
     var countIncorrect = 0;
@@ -9,6 +9,10 @@
     var pick;
     var randomQ;
     var placeholder = [];
+
+
+
+
 //make api call to get trivia questions
     function triviaGame(queryURL) {
      $.ajax({
@@ -23,20 +27,20 @@
 
     }
 
-    // function shuffle(arr) {
-    //     var m = arr.length,
-    //         t, i;
-    //     While there remain elements to shuffle…
-    //     while (m) {
-    //         Pick a remaining element…
-    //         i = Math.floor(Math.random() * m--);
-    //         And swap it with the current element.
-    //         t = arr[m];
-    //         arr[m] = arr[i];
-    //         arr[i] = t;
-    //     }
-    //     return arr;
-    // }
+    function shuffle(arr) {
+        var m = arr.length,
+            t, i;
+    //        While there remain elements to shuffle…
+        while (m) {
+      //      Pick a remaining element…
+            i = Math.floor(Math.random() * m--);
+        //    And swap it with the current element.
+            t = arr[m];
+            arr[m] = arr[i];
+            arr[i] = t;
+        }
+        return arr;
+    }
 
 
 
@@ -105,7 +109,7 @@ function checkEnd () {
         if (timer === 0) {
             countTimeout++;
             stop();
-            $("#answers").html("<p>Time ran out! The answer was: " + pick.correct_answer + "</p>");
+            $("#answers").html("<p style = 'color:red'>Time ran out! The answer was: " + pick.correct_answer + "</p>");
             checkEnd();
         }	
     }
@@ -151,26 +155,7 @@ function checkEnd () {
             }
             return arr;
         }
-        shuffle(answers);
-        console.log(answers);
-        
-    //     randQuestion = pick.incorrect_answers
-    //     reorderQuestion = [];
 
-
-    //     const formRandom = (arr) => {
-    //     while (arr.length !== 0){
-    //         if (reorderQuestion.length < arr.length){
-    //             let qs = arr[Math.floor(Math.random() * arr.length)];
-    //             reorderQuestion.push(qs);
-    //             arr.splice(arr.indexOf(qs), 1);
-    //     }}
-    // }
-    //    formRandom(randQuestion)
-    //     console.log(randQuestion)
-    //     console.log(reorderQuestion)
-
-    //console.log (pick);
             $("#questions").html("<h2>" + pick.question + "</h2>");
             for(var i = 0; i < answers.length + 1; i++) {
                 var userChoice = $("<div>");
@@ -179,8 +164,6 @@ function checkEnd () {
                 
                 //assign array position to it so can check answer
                 userChoice.attr("data-guessvalue", i);
-
-
                 $("#answers").append(userChoice);
     //		}
     }
@@ -203,7 +186,7 @@ $(".possibleanswer").on("click", function () {
 		stop();
 		countIncorrect++;
 		userGuess="";
-        $("#answers").html("<p>Oops, that's incorrect. The answer was: " + pick.correct_answer + "</p>");
+        $("#answers").html("<p style = 'color:red'>Oops, that's incorrect. The answer was: " + pick.correct_answer + "</p>");
 		checkEnd();
 	}
 })

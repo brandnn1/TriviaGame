@@ -10,6 +10,7 @@
   .btn {
     position: relative;
     bottom: -300px;
+
   }
 
   #answers {
@@ -24,4 +25,45 @@
   
   #reset {
     visibility: visible;
+  }
+
+  h2, h4 {
+    margin: 30px;
+    font-weight: bold;
+  }
+
+  h1 {
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+    padding: 20px;
+    font-size: 45px;
+  }
+
+  p {
+    margin: 10px;
+    font-weight: bold;
+    color: green;
+    font-size: 20px;
+  }
+
+  body {
+    background-image: url("../images/KT516G.jpg");
+    background-size: cover;
+  }
+
+  #answers {
+    border: 1px solid black;
+    width: 40%;
+    color: black;
+    text-align: center;
+    margin: 15px auto;
+    font-size: 20px;
+    background-color: lightblue
+    
+  
+  }
+
+  .possibleanswer{
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
