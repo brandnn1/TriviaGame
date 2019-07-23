@@ -23,6 +23,23 @@
 
     }
 
+    // function shuffle(arr) {
+    //     var m = arr.length,
+    //         t, i;
+    //     While there remain elements to shuffle…
+    //     while (m) {
+    //         Pick a remaining element…
+    //         i = Math.floor(Math.random() * m--);
+    //         And swap it with the current element.
+    //         t = arr[m];
+    //         arr[m] = arr[i];
+    //         arr[i] = t;
+    //     }
+    //     return arr;
+    // }
+
+
+
 
     triviaGame(queryURL)
 
@@ -117,6 +134,25 @@ function checkEnd () {
         //generate random index in array
         randomQ = Math.floor(Math.random()*options.length);
         pick = options[randomQ];
+        answers = pick.incorrect_answers;
+        answers.push(pick.correct_answer);
+        console.log(answers);
+        function shuffle(arr) {
+            var m = arr.length,
+                t, i;
+            // While there remain elements to shuffle…
+            while (m) {
+                // Pick a remaining element…
+                i = Math.floor(Math.random() * m--);
+                // And swap it with the current element.
+                t = arr[m];
+                arr[m] = arr[i];
+                arr[i] = t;
+            }
+            return arr;
+        }
+        shuffle(answers);
+        console.log(answers);
         
     //     randQuestion = pick.incorrect_answers
     //     reorderQuestion = [];
@@ -136,14 +172,14 @@ function checkEnd () {
 
     //console.log (pick);
             $("#questions").html("<h2>" + pick.question + "</h2>");
-            for(var i = 0; i < pick.incorrect_answers.length + 1; i++) {
+            for(var i = 0; i < answers.length + 1; i++) {
                 var userChoice = $("<div>");
                 userChoice.addClass("possibleanswer");
-                userChoice.html(pick.correct_answer);
-                userChoice.html(pick.incorrect_answers[i]);
+                userChoice.html(answers[i]);
                 
                 //assign array position to it so can check answer
                 userChoice.attr("data-guessvalue", i);
+
 
                 $("#answers").append(userChoice);
     //		}
@@ -152,7 +188,7 @@ function checkEnd () {
 //click function to select answer and outcomes
 $(".possibleanswer").on("click", function () {
 	//grab array position from userGuess
-    userGuess = $(this).text();
+    userGuess = $(this).html();
     console.log(userGuess);
     console.log(pick.correct_answer);
 	//correct guess or wrong guess outcomes
