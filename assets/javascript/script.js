@@ -21,30 +21,30 @@
         }).then(function(response) {
 
         options = response.results
-        console.log(options)
+    
         });
 
 
     }
 
-    function shuffle(arr) {
-        var m = arr.length,
-            t, i;
-    //        While there remain elements to shuffle…
-        while (m) {
-      //      Pick a remaining element…
-            i = Math.floor(Math.random() * m--);
-        //    And swap it with the current element.
-            t = arr[m];
-            arr[m] = arr[i];
-            arr[i] = t;
-        }
-        return arr;
-    }
+    // function shuffle(arr) {
+    //     var m = arr.length,
+    //         t, i;
+    // //        While there remain elements to shuffle…
+    //     while (m) {
+    //   //      Pick a remaining element…
+    //         i = Math.floor(Math.random() * m--);
+    //     //    And swap it with the current element.
+    //         t = arr[m];
+    //         arr[m] = arr[i];
+    //         arr[i] = t;
+    //     }
+    //     return arr;
+    // }
 
 
 
-
+   
     triviaGame(queryURL)
 
     //reset code
@@ -155,6 +155,7 @@ function checkEnd () {
             }
             return arr;
         }
+        shuffle(answers);
 
             $("#questions").html("<h2>" + pick.question + "</h2>");
             for(var i = 0; i < answers.length + 1; i++) {
